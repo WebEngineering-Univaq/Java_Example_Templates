@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Esempio</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+        <!-- interpolations semplici, builtins e defaults -->
+        <!-- simple interpolations, builtins and defaults -->
+        <p> ${saluto!"Hello!"} </p>
+        <p> ${number+1} </p>
+        <p> ${name?lower_case?cap_first} ${surname?lower_case?cap_first},
+            <!-- accesso a hash nidificate -->
+            <!-- access to nested hashes -->
+            ${address.street} ${address.number!"SNC"}, ${address.city} </p>
+
+        <!-- output condizionale: condizione sulla definizione della variabile -->
+        <!-- conditional output: condition on the variable definition -->
+        <#if (person??) >
+        <!-- output delle proprieta' di un java bean -->
+        <!-- output of a java bean properties -->
+        <p> ${person.name?cap_first} ${person.surname?cap_first},
+            ${person.address.street} ${person.address.number!"SNC"}, ${person.address.city} </p>
+        </#if>
+
+        <#if (otherperson??) >
+        <p> ${otherperson.name?cap_first}  </p>
+        <#else>
+        <p>There is no other person!</p>
+        </#if>
+
+
+        <!-- accesso a singoli elementi di una lista -->
+        <!-- access to single list elements -->
+        <p>${relatives[0].name}</p>
+        <p>${relatives[number].name}</p>
+
+        <!-- output condizionale: condizioni complesse -->
+        <!-- conditional output: complex contidions -->
+        <#if relatives[0].name?contains("a")>
+        <p>Yes, it is.</p>
+        </#if>
+
+        <!-- output condizionale: condizione su builtin di lista -->
+        <!-- conditional output: condition on a list builtin -->
+        <#if (relatives?size > 0)>
+        <ul>
+            <!-- iterazione su lista -->
+            <!-- iteration over a list -->
+            <#list relatives as relative>
+            <!-- il builtin index restituisce l'indice corrente del loop -->
+            <!-- the index builtin returns the current loop index -->
+            <li>${relative?index+1}) ${relative.name} (${relative.age})</li>    
+            <!-- oppure/or ${relative?counter} -->
+            </#list>            
+        </ul>
+        <#else>
+        <p>No relatives</p>
+        </#if>
+
+        <!-- le utime versioni di freemarker permettono di inserire un else direttamente nella list -->
+        <!-- latest versions of freemarker allow an else directly in the list directive -->
+        <p>
+            <#list relatives as relative>
+            <!-- la direttiva sep inserisce il separatore solo tra gli elementi della lista -->
+            <!-- the sep directove adds a the give separator only between the list elements -->
+            ${relative.name} (${relative.age})<#sep>, </#sep>
+            <#else>    No relatives
+            </#list>           
+        </p>
+
+        <!-- versione alternativa senza la direttiva sep -->
+        <!-- alternative version, without the sep directive -->
+        <p>
+            <#list relatives as relative>
+            <!-- il builtin has_next restituisce true se la variabile (di loop) ha un elemento successivo -->
+            <!-- the has_next builtin returns true if the (loop) variable has a next element -->
+            ${relative.name} (${relative.age})<#if (relative?has_next)>, </#if>
+            <#else>    No relatives 
+            </#list>           
+        </p>
+
+
+        <!-- inclusione di template con nome non statico -->
+        <!-- template inclusion with non-static name -->
+        <#include template_to_include>
+
+        <!-- le macro non sono trattate a lezione, qui riportiamo solo qualche esempio di base -->
+        <!-- macros are not between the lecture arguments, here we report only some basic examples -->
+
+        <!-- macro senza parametri, definita e poi richiamata -->
+        <!-- zero-argument macro, defined and the called -->
+        <#macro codeblock1>
+        <p> ${name?cap_first} ${surname?cap_first}</p>
+        </#macro>
+
+        <@codeblock1/>
+
+        <!-- macro con parametro dotato di default, definita e poi richiamata con e senza argomenti -->
+        <!-- one-argument macro with a default value, defined and the called with and without arguments -->
+        <#macro codeblock2 saluto="ciao">
+        <p>${saluto} ${name?cap_first} ${surname?cap_first}</p>
+        </#macro>
+
+        <@codeblock2/>
+        <@codeblock2 saluto="hello"/>
+
+        <!-- macro-direttiva: la parte #nested viene sostituita con il testo inserito nel tag di chiamata -->
+        <!-- macro-directive: the #nested part becomes the text included in the calling tag -->
+        <#macro codeblock3 saluto>
+        <p>${saluto} ${name?cap_first} ${surname?cap_first} <#nested>  </p>
+        </#macro>
+
+        <@codeblock3 saluto="hello"/>
+        <@codeblock3 saluto="hello">how are you?</@codeblock3>
+
+    </body>
+</html>
+
