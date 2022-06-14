@@ -1,4 +1,4 @@
-# Esempio_Templates_Maven
+# Java_Example_Templates
 > Basic examples for the Freemarker template engine used in a servlet
 
 This example demonstrates the basics of Freemarker, a template engine for Java applications, very useful to generate the html output of web applications.
@@ -16,4 +16,4 @@ This is a Maven-based project. Simply download the code and open it in any Maven
 
 ---
 
-![University od L'Aquila](https://www.disim.univaq.it/skins/aqua/img/logo2021-2.png)
+![University of L'Aquila](https://www.disim.univaq.it/skins/aqua/img/logo2021-2.png)
