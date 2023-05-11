@@ -1,0 +1,109 @@
+html, body {
+		font-family: tahoma,verdana,arial,helvetica;
+font-size: 12pt;
+	margin:5px;
+	padding:0;
+}
+
+h1 {
+	background-color: #cdcdcd;	
+	font-size: 20pt;
+}
+
+h2 {
+	background-color: #eee;
+	font-size: 16pt;
+}
+
+h3 {
+	background-color: #fff;
+	font-size: 14pt;
+}
+
+h3 {
+	font-family: tahoma,verdana,arial,helvetica ;
+	font-size: 14pt;
+}
+
+
+.esempi { 	
+	 width: 99.5%; margin: auto;
+}
+
+.esempi .esempio { 	
+	display: flex; 			
+	flex-direction: row; 	
+	flex-wrap: nowrap; 
+	margin: 2px 0;
+	justify-content: space-between;
+	padding-top: 2px;
+	border-top: 2px solid #cdcdcd;
+}
+
+.esempi .esempio:first-child { 	
+	padding-top: 0;
+	border-width: 0;
+}
+
+.esempio .sorgente,.esempio .rendering {
+	flex-basis: 48.5%; 
+	max-width: 48.5%; 	
+	flex-grow: 1; 
+	flex-shrink: 0; 
+	padding: 0.5%;
+} 
+
+.esempio .rendering {
+	border: 1px dashed #cdcdcd;
+}
+
+.esempio .sorgente {
+	border: 1px dashed #cdcdcd;
+	font-family: courier;
+	background-color: #eee;
+}
+
+.esempio .sorgente p {
+	margin: 0;	
+	padding: 2px;	
+	white-space: pre-line;
+}
+
+.esempio .sorgente p:hover {
+	border: 1px dashed black;
+	background-color: white;
+	color: black;
+	padding: 1px;	
+	cursor: help;
+}
+
+.esempio .sorgente .commento {
+	font-family: tahoma,verdana,arial,helvetica;
+	font-size: 90%;
+	font-weight: bold;
+	background-color: yellow;
+	display: block;
+}
+
+.esempio .sorgente .commento:before {
+	content: "/*";
+}
+.esempio .sorgente .commento:after {
+	content: "*/";
+}
+
+.highlight {
+	background-color: yellow;
+}
+
+.block-container {
+	border-left: 1px dotted gray;
+}
+
+.block-container .block-container {
+	margin-left:1em; 
+}
+
+.block-container + .block-container {
+	margin-top: 1em;
+}

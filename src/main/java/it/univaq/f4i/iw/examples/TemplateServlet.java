@@ -41,7 +41,7 @@ public class TemplateServlet extends HttpServlet {
 
         //configurazione di Freemarker (compatibile con la versione 2.3.26)
         //Freemarker configuration (compatible with version 2.3.26)
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_26);
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
         //impostiamo l'encoding di default per l'input e l'output
         //set the default input and outpout encoding
         cfg.setOutputEncoding("utf-8");
@@ -54,7 +54,7 @@ public class TemplateServlet extends HttpServlet {
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
         //impostiamo il gestore degli oggetti - trasformerà in hash i Java beans
         //set the object handler that allows us to "view" Java beans as hashes
-        DefaultObjectWrapperBuilder owb = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_26);
+        DefaultObjectWrapperBuilder owb = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_32);
         owb.setForceLegacyNonListCollections(false);
         owb.setDefaultDateType(TemplateDateModel.DATETIME);
         cfg.setObjectWrapper(owb.build());
@@ -107,7 +107,7 @@ public class TemplateServlet extends HttpServlet {
         //impostiamo il nome del file che verrà incluso tramite la direttiva include
         //set the file name to be included through the include directive
         datamodel.put("template_to_include", "esempio_inner.ftl.html");
-        //notare come il template incluso veda lo stesso data model di quello principale
+        //notare come il template incluso vede lo stesso data model di quello principale
         //note that the included template views the same data model as the main tamplate
 
         //carichiamo il template
