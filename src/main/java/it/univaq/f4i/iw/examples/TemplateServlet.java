@@ -1,5 +1,6 @@
 package it.univaq.f4i.iw.examples;
 
+import freemarker.cache.JavartaWebappTemplateLoader;
 import freemarker.core.HTMLOutputFormat;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
@@ -7,6 +8,10 @@ import freemarker.template.Template;
 import freemarker.template.TemplateDateModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -46,14 +47,9 @@ public class TemplateServlet extends HttpServlet {
         //set the default input and outpout encoding
         cfg.setOutputEncoding("utf-8");
         cfg.setDefaultEncoding("utf-8");
-        //impostiamo la directory (relativa al contesto) da cui caricare i templates
-        //set the (context relative) directory for template loading
-        cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
-        //impostazione simile equivalente alla precedente, usabile nel caso in cui il ServletContext non fosse disponibile
-        //o fosse incompatibile, come nel caso di JakartaEE 9 e Freemarker 2_3_32
-        //setting similar to the previous one, useful when ServletContext is not available
-        //or not compatible, as for JakartaEE 9 and Freemarker 2_3_32
-        //cfg.setDirectoryForTemplateLoading(new File(getServletContext().getRealPath("")+File.separatorChar+"templates"));
+        //impostiamo la directory (relativa al contesto) da cui caricare i templates (Jakarta version)
+        //set the (context relative) directory for template loading (Jakarta version)
+        cfg.setTemplateLoader(new JavartaWebappTemplateLoader(getServletContext(),"templates"));
         //impostiamo un handler per gli errori nei template - utile per il debug
         //set an error handler for debug purposes
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
