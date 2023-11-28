@@ -49,6 +49,7 @@ public class TemplateServlet extends HttpServlet {
         //impostiamo la directory (relativa al contesto) da cui caricare i templates
         //set the (context relative) directory for template loading
         cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
+        //cfg.setTemplateLoader(new JakartaWebappTemplateLoader(context, "templates")); //patch se usato con JakartaEE
         //impostazione simile equivalente alla precedente, usabile nel caso in cui il ServletContext non fosse disponibile
         //o fosse incompatibile, come nel caso di JakartaEE 9 e Freemarker 2_3_32
         //setting similar to the previous one, useful when ServletContext is not available
