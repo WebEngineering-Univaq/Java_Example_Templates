@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import no.api.freemarker.java8.Java8ObjectWrapper;
 
 /**
  *
@@ -60,10 +61,18 @@ public class TemplateServlet extends HttpServlet {
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
         //impostiamo il gestore degli oggetti - trasformerà in hash i Java beans
         //set the object handler that allows us to "view" Java beans as hashes
-        DefaultObjectWrapperBuilder owb = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_32);
-        owb.setForceLegacyNonListCollections(false);
-        owb.setDefaultDateType(TemplateDateModel.DATETIME);
-        cfg.setObjectWrapper(owb.build());
+//        DefaultObjectWrapperBuilder owb = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_32);
+//        owb.setForceLegacyNonListCollections(false);
+//        owb.setDefaultDateType(TemplateDateModel.DATETIME);
+//        cfg.setObjectWrapper(owb.build());
+        //versione corretta per gestire i tipi java.time 
+        //patched version to handle java.time types
+        Java8ObjectWrapper ow = new Java8ObjectWrapper(Configuration.VERSION_2_3_26);
+        ow.setDefaultDateType(TemplateDateModel.DATETIME);
+        ow.setForceLegacyNonListCollections(false);
+        cfg.setObjectWrapper(ow);        
+
+
         //impostiamo il tipo di output: in questo modo freemarker abiliterà il necessario escaping
         //set the output format, so that freemarker will enable the correspondoing escaping
         cfg.setOutputFormat(HTMLOutputFormat.INSTANCE);
