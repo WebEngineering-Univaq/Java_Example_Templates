@@ -40,8 +40,8 @@ public class TemplateServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=utf-8");
 
-        //configurazione di Freemarker (compatibile con la versione 2.3.26)
-        //Freemarker configuration (compatible with version 2.3.26)
+        //configurazione di Freemarker (compatibile con la versione 2.3.32)
+        //Freemarker configuration (compatible with version 2.3.32)
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
         //impostiamo l'encoding di default per l'input e l'output
         //set the default input and outpout encoding
@@ -50,11 +50,11 @@ public class TemplateServlet extends HttpServlet {
         //impostiamo la directory (relativa al contesto) da cui caricare i templates
         //set the (context relative) directory for template loading
         cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
-        //cfg.setTemplateLoader(new JakartaWebappTemplateLoader(context, "templates")); //patch se usato con JakartaEE
+        //cfg.setTemplateLoader(new JakartaWebappTemplateLoader(getServletContext(), "templates")); //patch se usato con JakartaEE
         //impostazione simile equivalente alla precedente, usabile nel caso in cui il ServletContext non fosse disponibile
-        //o fosse incompatibile, come nel caso di JakartaEE 9 e Freemarker 2_3_32
+        //o fosse incompatibile
         //setting similar to the previous one, useful when ServletContext is not available
-        //or not compatible, as for JakartaEE 9 and Freemarker 2_3_32
+        //or not compatible
         //cfg.setDirectoryForTemplateLoading(new File(getServletContext().getRealPath("")+File.separatorChar+"templates"));
         //impostiamo un handler per gli errori nei template - utile per il debug
         //set an error handler for debug purposes
@@ -67,11 +67,10 @@ public class TemplateServlet extends HttpServlet {
 //        cfg.setObjectWrapper(owb.build());
         //versione corretta per gestire i tipi java.time 
         //patched version to handle java.time types
-        Java8ObjectWrapper ow = new Java8ObjectWrapper(Configuration.VERSION_2_3_26);
+        Java8ObjectWrapper ow = new Java8ObjectWrapper(Configuration.VERSION_2_3_32);
         ow.setDefaultDateType(TemplateDateModel.DATETIME);
         ow.setForceLegacyNonListCollections(false);
-        cfg.setObjectWrapper(ow);        
-
+        cfg.setObjectWrapper(ow);
 
         //impostiamo il tipo di output: in questo modo freemarker abiliterà il necessario escaping
         //set the output format, so that freemarker will enable the correspondoing escaping
@@ -137,7 +136,6 @@ public class TemplateServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -173,6 +171,6 @@ public class TemplateServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Template servlet";
+    }
 }
