@@ -13,7 +13,7 @@ import freemarker.log.Logger;
 import freemarker.template.utility.CollectionUtils;
 import freemarker.template.utility.NullArgumentException;
 import freemarker.template.utility.StringUtil;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 //import jakarta.servlet.ServletContext;
 
 
