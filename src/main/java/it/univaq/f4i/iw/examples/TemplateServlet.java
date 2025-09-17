@@ -2,7 +2,6 @@ package it.univaq.f4i.iw.examples;
 
 import freemarker.core.HTMLOutputFormat;
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.Template;
 import freemarker.template.TemplateDateModel;
 import freemarker.template.TemplateException;
@@ -14,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import no.api.freemarker.java8.Java8ObjectWrapper;
 
 /**
@@ -42,15 +41,15 @@ public class TemplateServlet extends HttpServlet {
 
         //configurazione di Freemarker (compatibile con la versione 2.3.32)
         //Freemarker configuration (compatible with version 2.3.32)
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_33);
         //impostiamo l'encoding di default per l'input e l'output
         //set the default input and outpout encoding
         cfg.setOutputEncoding("utf-8");
         cfg.setDefaultEncoding("utf-8");
         //impostiamo la directory (relativa al contesto) da cui caricare i templates
         //set the (context relative) directory for template loading
-        cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
-        //cfg.setTemplateLoader(new JakartaWebappTemplateLoader(getServletContext(), "templates")); //patch se usato con JakartaEE
+        //cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
+        cfg.setTemplateLoader(new freemarker.ext.jakarta.servlet.WebappTemplateLoader(getServletContext(), "templates")); //patch se usato con JakartaEE
         //impostazione simile equivalente alla precedente, usabile nel caso in cui il ServletContext non fosse disponibile
         //o fosse incompatibile
         //setting similar to the previous one, useful when ServletContext is not available
