@@ -48,8 +48,8 @@ public class TemplateServlet extends HttpServlet {
         cfg.setDefaultEncoding("utf-8");
         //impostiamo la directory (relativa al contesto) da cui caricare i templates
         //set the (context relative) directory for template loading
-        //cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
-        cfg.setTemplateLoader(new freemarker.ext.jakarta.servlet.WebappTemplateLoader(getServletContext(), "templates")); //patch se usato con JakartaEE
+        cfg.setServletContextForTemplateLoading(getServletContext(), "templates");        
+        //cfg.setTemplateLoader(new freemarker.ext.jakarta.servlet.WebappTemplateLoader(getServletContext(), "templates")); //patch se usato con JakartaEE con vecchie versioni di freemarker
         //impostazione simile equivalente alla precedente, usabile nel caso in cui il ServletContext non fosse disponibile
         //o fosse incompatibile
         //setting similar to the previous one, useful when ServletContext is not available
